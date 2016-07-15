@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara/poltergeist'
+
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -27,6 +29,18 @@ require 'cucumber/rails'
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
+
+Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path)
+end
+
+Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
+
+Capybara.configure do |config|
+  config.default_max_wait_time = 5
+  config.server_port = 3000
+end
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.

@@ -26,6 +26,8 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'poltergeist'
+  gem 'phantomjs'
 end
 
 

@@ -1,7 +1,7 @@
 class Api::V1::WelcomeController < Api::V1::BaseController
 
   def index
-    @data = {msg: "Hello world"}
+    @data = [{msg: "Hello world"}, {msg: "Something else"}]
     render json: @data
   end
 end

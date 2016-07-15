@@ -11,7 +11,7 @@ RSpec.describe Api::V1::WelcomeController, :type => :controller do
 
     it "renders correct json" do
       get :index
-      expect(response.body).to eq({msg: "Hello world"}.to_json)
+      expect(response.body).to eq([{msg: "Hello world"}, {msg: "Something else"}].to_json)
     end
   end
 end
