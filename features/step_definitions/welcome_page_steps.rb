@@ -6,5 +6,5 @@ end
 Then(/^I should see hello world text$/) do
   click_button('Get welcomed')
   save_screenshot('./file1.png', :full => true)
-  expect(find('.marketing').find('h1')).to have_content('Hello world')
+  expect(find('.marketing').find('h1')).to have_content('It works 3')
 end
