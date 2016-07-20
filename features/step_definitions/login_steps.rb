@@ -25,3 +25,13 @@ end
 Then(/^I am logged out$/) do
    expect(find('h1')).to have_content('Log in')
 end
+
+When(/^I enter incorect credentials$/) do
+  fill_in 'email', :with => 'test@wrong.com'
+  fill_in 'password', :with => 'wrong_password'
+  find('.a0-next').click
+end
+
+Then(/^I can't see my profile$/) do
+  expect(find('h1')).to have_content('Log in')
+end

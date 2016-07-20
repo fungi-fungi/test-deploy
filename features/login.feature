@@ -12,3 +12,9 @@ Feature: Login
     Given I am logged in
     When I logout
     Then I am logged out
+
+  @javascript
+  Scenario: Login with incorect credentials
+    Given I am on main page
+    When I enter incorect credentials
+    Then I can't see my profile
