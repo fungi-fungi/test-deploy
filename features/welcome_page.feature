@@ -1,3 +1,4 @@
+@welcome
 Feature: Welcome page
 
   @javascript
