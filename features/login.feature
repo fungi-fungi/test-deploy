@@ -2,6 +2,6 @@ Feature: Login
 
   @jascript
   Scenario: Login
-  Given "Iurii" has a account in the system
-  When "Iurii" entenrs correct credentials
-  Then he can see his profile
+    Given I am on main page
+    When I enter correct credentials
+    Then I can see my profile

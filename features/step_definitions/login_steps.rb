@@ -1,11 +1,14 @@
-Given(/^"([^"]*)" has a account in the system$/) do |arg1|
-  true
+Given(/^I am on main page$/) do
+  visit 'http://localhost:9000/#!/logout'
+  visit 'http://localhost:9000'
 end
 
-When(/^"([^"]*)" entenrs correct credentials$/) do |arg1|
-  true
+When(/^I enter correct credentials$/) do
+  fill_in 'email', :with => 'iurii@gwexhibits.com'
+  fill_in 'password', :with => '03051990'
+  find('.a0-next').click
 end
 
-Then(/^he can see his profile$/) do
-  true
+Then(/^I can see my profile$/) do
+  expect(find('.marketing').find('h1')).to have_content('It works 3')
 end
