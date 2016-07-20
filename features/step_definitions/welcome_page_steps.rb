@@ -1,10 +1,12 @@
 When(/^I am on the homepage$/) do
-  visit 'http://localhost:9000'
-  save_screenshot('./file.png', :full => true)
+  step "I am on main page"
+  step "I enter correct credentials"
+end
+
+When(/^I submit new request$/) do
+  click_button('Get welcomed')
 end
 
 Then(/^I should see hello world text$/) do
-  click_button('Get welcomed')
-  save_screenshot('./file1.png', :full => true)
-  expect(find('.marketing').find('h1')).to have_content('It works 3')
+  expect(find('.marketing').find('h2')).to have_content('Hello world')
 end
