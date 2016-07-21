@@ -31,6 +31,8 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'phantomjs'
+  gem 'faker'  
+  gem 'factory_girl_rails'  
 end
 
 
