@@ -1,4 +1,4 @@
-@wip
+@Inventory
 Feature: Inventory
 
   Background: 
@@ -7,5 +7,6 @@ Feature: Inventory
   @jascript
   Scenario: View my inventory
     Given I am on my profile page
-    When I request my inventory
-    Then I can see all my inventory
+    When I go to "Inventory" page
+    And I request my inventory
+    Then I can see 10 items in my inventory
