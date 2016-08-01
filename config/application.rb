@@ -15,6 +15,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+WillPaginate.per_page = 25
+
 module TestApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

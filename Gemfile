@@ -13,8 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rack-cors', :require => 'rack/cors'
 gem 'knock', '~> 1.4.2'
 gem 'active_model_serializers'
-gem 'kaminari'
 gem 'api-pagination'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug'
@@ -34,7 +34,8 @@ group :test do
   gem 'poltergeist'
   gem 'phantomjs'
   gem 'faker'  
-  gem 'factory_girl_rails'  
+  gem 'factory_girl_rails'
+  gem 'capybara-angular'
 end
 
 
