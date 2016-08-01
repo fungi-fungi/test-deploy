@@ -4,12 +4,6 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  schema_search_path: "salesforce,public"
-
 development:
   adapter: postgresql
   encoding: unicode
@@ -17,14 +11,31 @@ development:
   pool: 5
   username: postgres
   password: postgres
+  schema_search_path: "salesforce,public"
 
-test: &test
-  <<: *default
-  database: db/test.sqlite3
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: heroku_connect_test
+  pool: 5
+  username: postgres
+  password: postgres
+  schema_search_path: "salesforce,public"
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: heroku_connect_prod
+  pool: 5
+  username: postgres
+  password: postgres
+  schema_search_path: "salesforce,public"
 
 cucumber:
-  <<: *test
+  adapter: postgresql
+  encoding: unicode
+  database: heroku_connect_test
+  pool: 5
+  username: postgres
+  password: postgres
+  schema_search_path: "salesforce,public"
