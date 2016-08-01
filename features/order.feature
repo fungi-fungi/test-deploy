@@ -7,7 +7,7 @@ Feature: Order
     And I have 2 avaliable configuration
 
   @jascript
-  Scenario: I can see amy configurations
+  Scenario: I can see all configurations
     Given I am on my profile page
     When I go to "Orders" page
     Then I can see 2 avaliable configurations

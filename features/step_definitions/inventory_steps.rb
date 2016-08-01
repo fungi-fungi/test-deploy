@@ -6,16 +6,20 @@ end
 Given(/^I am on my profile page$/) do
   step "I am on main page"
   step "I enter correct credentials"
+  expect(page).to have_content("It works 3")
 end
 
 When(/^I go to "([^"]*)" page$/) do |arg1|
-  find('.navbar').click_link(arg1)
+  find("a#inventory-page").click
+  expect(page).to have_content("This is the inventory view.")
 end
 
 When(/^I request my inventory$/) do
-  click_button("Get stock")
+  find("button#get-inventory").click
+  expect(page).to have_content("clicked")
 end
 
 Then(/^I can see (\d+) items in my inventory$/) do |arg1|
-  expect(page).to have_selector('table')
+  expect(page).to have_content(StockItem.first.name)
+  expect(find('#inventory-table').all('tr').size).to eq(arg1.to_i)
 end

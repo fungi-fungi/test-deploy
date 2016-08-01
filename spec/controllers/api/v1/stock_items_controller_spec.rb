@@ -48,13 +48,13 @@ RSpec.describe Api::V1::StockItemsController, :type => :controller do
       describe 'pagination' do
 
         before(:each) do
-          create_list(:stock_item, 50, account: @account)
+          create_list(:stock_item,  WillPaginate.per_page + 12, account: @account)
         end
 
         it "returns correct amount of recorde per page" do
           get :index
-          expect(JSON.parse(response.body).size).to eq(Kaminari.config.default_per_page)
-          expect(response.headers['Per-Page'].to_i).to be == Kaminari.config.default_per_page
+          expect(JSON.parse(response.body).size).to eq(WillPaginate.per_page)
+          expect(response.headers['Per-Page'].to_i).to be == WillPaginate.per_page
         end
 
         it "returns correct total amount in header" do
@@ -64,7 +64,7 @@ RSpec.describe Api::V1::StockItemsController, :type => :controller do
 
         it "returns correct amount of items on next page" do
           get :index, {page: '2'}
-          expect(JSON.parse(response.body).size).to eq(@account.stock_items.size - Kaminari.config.default_per_page)
+          expect(JSON.parse(response.body).size).to eq(@account.stock_items.size - WillPaginate.per_page)
         end
 
       end
