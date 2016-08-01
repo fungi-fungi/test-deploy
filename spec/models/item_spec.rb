@@ -14,6 +14,10 @@ RSpec.describe Item, type: :model do
     expect(build(:item, category: nil)).not_to be_valid
   end
 
+  it "is invalid without a create date" do
+    expect(build(:item, createddate: nil)).not_to be_valid
+  end
+
   it "can be saved" do
     old_size = Item.all.size
     create(:item)

@@ -10,6 +10,10 @@ RSpec.describe StockItem, type: :model do
     expect(build(:stock_item, name: nil)).not_to be_valid
   end
 
+  it "is invalid without sfid" do
+    expect(build(:stock_item, sfid: nil)).not_to be_valid
+  end
+
   it "is invalid without a item" do
     expect(build(:stock_item, item: nil)).not_to be_valid
   end
@@ -24,6 +28,10 @@ RSpec.describe StockItem, type: :model do
 
   it "is invalid without amount" do
     expect(build(:stock_item, i_m__amount__c: nil)).not_to be_valid
+  end
+
+  it "is invalid without a create date" do
+    expect(build(:item, createddate: nil)).not_to be_valid
   end
 
   it "can be saved" do
