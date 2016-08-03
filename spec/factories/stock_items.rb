@@ -7,5 +7,11 @@ FactoryGirl.define do
     f.createddate         { Faker::Time.between(10.days.ago, 2.days.ago) }
     association           :account, factory: :account
     association           :item, factory: :item
-  end
+
+    trait :iurii_stock_items do
+      association :account, Account.where(sfid: '0013600000NSyCRAA1').first
+    end
+
+    factory :stock_items_belongs_to_iurii, traits: [:iurii_stock_items]
+    end
 end
