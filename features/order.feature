@@ -1,5 +1,5 @@
-
-Feature: Order
+@Ordering
+Feature: Ordering
 
   Background: 
     Given I have account
@@ -9,5 +9,5 @@ Feature: Order
   @jascript
   Scenario: I can see all configurations
     Given I am on my profile page
-    When I go to "Orders" page
+    When I go to Configuration page
     Then I can see 2 avaliable configurations

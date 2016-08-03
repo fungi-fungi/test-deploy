@@ -1,6 +1,9 @@
+Given(/^I have account$/) do
+  FactoryGirl.create(:account, sfid: '0013600000NSyCRAA1')
+end
+
 Given(/^I have (\d+) items in my inventory$/) do |arg1|
-  account = FactoryGirl.create(:account, sfid: '0013600000NSyCRAA1')
-  FactoryGirl.create_list(:stock_item, arg1.to_i, account: account)
+  FactoryGirl.create_list(:stock_item, arg1.to_i, account: Account.where(sfid: '0013600000NSyCRAA1').first)
 end
 
 Given(/^I am on my profile page$/) do
@@ -9,7 +12,7 @@ Given(/^I am on my profile page$/) do
   expect(page).to have_content("It works 3")
 end
 
-When(/^I go to "([^"]*)" page$/) do |arg1|
+When(/^I go to Inventory page$/) do
   find("a#inventory-page").click
   expect(page).to have_content("This is the inventory view.")
 end
