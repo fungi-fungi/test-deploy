@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rack-cors', :require => 'rack/cors'
 gem 'knock', '~> 1.4.2'
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.2'
 gem 'api-pagination'
 gem 'will_paginate'
 
@@ -33,9 +33,11 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'phantomjs'
-  gem 'faker'  
+  gem 'faker'
   gem 'factory_girl_rails'
   gem 'capybara-angular'
+  gem 'simplecov', :require => false
+  gem 'codacy-coverage', :require => false
 end
 
 
