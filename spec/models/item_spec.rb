@@ -6,6 +6,10 @@ RSpec.describe Item, type: :model do
     expect(build(:item)).to be_valid
   end
 
+  it "is invalid without a sfid" do
+    expect(build(:item, sfid: nil)).not_to be_valid
+  end
+
   it "is invalid without a name" do
     expect(build(:item, name: nil)).not_to be_valid
   end

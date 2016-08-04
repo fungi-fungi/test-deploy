@@ -6,6 +6,10 @@ RSpec.describe Category, type: :model do
     expect(build(:category)).to be_valid
   end
 
+  it "is invalid without a sfid" do
+    expect(build(:category, sfid: nil)).not_to be_valid
+  end
+
   it "is invalid without a name" do
     expect(build(:category, name: nil)).not_to be_valid
   end
