@@ -3,7 +3,7 @@ Feature: Ordering
 
   Background: 
     Given I have account
-    And I have 10 items in my inventory
+    And I have 5 previous orders
     And I have 2 avaliable configuration
 
   @javascript
@@ -14,7 +14,13 @@ Feature: Ordering
 
   @javascript
   Scenario: I can see all my previous orders
-    Given I have 5 previous orders
-    And I am on my profile page
+    Given I am on my profile page
     When I go to Orders page
     Then I can see 5 orders
+
+  @javascript
+  Scenario: I can view all elements required for configuration
+    Given I am on my profile page
+    When I go to Configuration page
+    And click on detail for random category
+    Then I can see all elements required for configuration
