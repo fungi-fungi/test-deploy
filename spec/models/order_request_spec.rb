@@ -10,6 +10,14 @@ RSpec.describe OrderRequest, type: :model do
     expect(build(:order_request, account: nil)).not_to be_valid
   end
 
+   it "is invalid without request bom" do
+    expect(build(:order_request, request_bom: nil)).not_to be_valid
+  end
+
+  it "is invalid without a event" do
+    expect(build(:order_request, event: nil)).not_to be_valid
+  end
+
   it "can be saved" do
     old_size = OrderRequest.all.size
     create(:order_request)

@@ -26,6 +26,10 @@ RSpec.describe RequestEntity, type: :model do
     expect(build(:request_entity, item: nil)).not_to be_valid
   end
 
+  it "is invalid if no request bom specified" do
+    expect(build(:request_entity, request_bom: nil)).not_to be_valid
+  end
+
   it "can be saved" do
     old_size = RequestEntity.all.size
     create(:request_entity)

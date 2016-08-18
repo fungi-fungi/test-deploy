@@ -3,5 +3,6 @@ FactoryGirl.define do
     f.name              { "RE-#{Faker::Number.number(5)}" }
     f.i_m__amount__c    { Faker::Number.number(3) }
     association         :item, factory: :item
+    association         :request_bom, factory: :request_bom
   end
 end
