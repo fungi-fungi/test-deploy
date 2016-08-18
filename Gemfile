@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5.1'
-gem 'pg'
+gem 'pg', '>= 0.19.0.beta'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -19,12 +19,8 @@ gem 'will_paginate'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.4'
-  gem 'sqlite3'
   gem 'dotenv-rails'
-end
-
-group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'guard-rspec'
 end
 
 group :test do
