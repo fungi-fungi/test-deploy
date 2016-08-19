@@ -24,7 +24,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
   gem 'poltergeist'
@@ -32,8 +32,8 @@ group :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'capybara-angular'
-  gem 'simplecov', :require => false
-  gem 'codacy-coverage', :require => false
+  gem 'simplecov', require: false
+  gem 'codacy-coverage', require: false
 end
 
 
