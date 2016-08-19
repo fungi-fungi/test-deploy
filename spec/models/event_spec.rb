@@ -14,6 +14,14 @@ RSpec.describe Event, type: :model do
     expect(build(:event, sfid: nil)).not_to be_valid
   end
 
+  it "is invalid without a convention center" do
+    expect(build(:event, account: nil)).not_to be_valid
+  end
+
+  it "is invalid if account is not a venue type" do
+    expect(build(:event, account: FactoryGirl.create(:account_client))).not_to be_valid
+  end
+
   it "is invalid without start date" do
     expect(build(:event, i_m__start_date__c: nil)).not_to be_valid
   end
@@ -26,15 +34,9 @@ RSpec.describe Event, type: :model do
     expect(build(:event, i_m__end_date__c: Time.now.yesterday, i_m__start_date__c: Time.now)).not_to be_valid
   end
 
-
   it "is invalid without city location" do
     expect(build(:event, i_m__city__c: nil)).not_to be_valid
   end
-
-  it "is invalid without a convention center" do
-    expect(build(:event, i_m__convention_center__c: nil)).not_to be_valid
-  end
-
 
   it "can be saved" do
     old_size = Event.all.size

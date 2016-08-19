@@ -2,9 +2,10 @@ class Event < ActiveRecord::Base
   self.table_name = 'salesforce.i_m__show_and_event__c'
 
   has_many :item_entities, primary_key: 'sfid', foreign_key: 'i_m__to_event__c'
+  belongs_to :account, primary_key: 'sfid', foreign_key: 'i_m__convention_center__c'
 
-  validates_presence_of :name, :sfid, :i_m__start_date__c, :i_m__end_date__c, :i_m__city__c, :i_m__convention_center__c
-  validate :start_date_has_to_be_before_end_date
+  validates_presence_of :name, :sfid, :account, :i_m__start_date__c, :i_m__end_date__c, :i_m__city__c
+  validate :start_date_has_to_be_before_end_date, :account_should_be_venue
 
   private
   
@@ -12,5 +13,13 @@ class Event < ActiveRecord::Base
     if self.i_m__start_date__c.present? && self.i_m__end_date__c.present? && self.i_m__start_date__c > self.i_m__end_date__c
       errors.add(:date_error, "start date can't be before end date'")
     end
-  end 
+  end
+
+  def account_should_be_venue
+    if self.account
+      if self.account.recordtypeid == nil || self.account.recordtypeid != "01236000000salCAAQ"
+        errors.add(:date_error, "account should be a venue")
+      end
+    end
+  end
 end
