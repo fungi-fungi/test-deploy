@@ -1,4 +1,6 @@
 class Api::V1::OrderRequestSerializer < ActiveModel::Serializer
-  attributes :id, :sfid
+  attributes :id
+
+  belongs_to :event
 
 end
