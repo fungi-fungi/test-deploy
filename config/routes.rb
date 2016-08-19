@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :stock_items, only: [:index]
       resources :configurations, only: [:index, :show]
       resources :orders, only: [:index, :show, :create]
+      resources :events, only: [:index, :show]
     end
   end
 
