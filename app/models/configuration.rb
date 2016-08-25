@@ -5,5 +5,13 @@ class Configuration < ActiveRecord::Base
   belongs_to :bom, primary_key: "sfid", foreign_key: "i_m__to_bom__c"
   belongs_to :category_set, primary_key: "sfid", foreign_key: "i_m__to_category_set__c"
 
+  def get_related_items
+    self.bom.items
+  end
+
+  def get_related_entities
+    self.bom.item_entities
+  end
+
   validates_presence_of :name, :sfid, :account, :bom, :category_set
 end
