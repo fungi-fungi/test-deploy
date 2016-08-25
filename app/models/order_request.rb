@@ -6,12 +6,15 @@ class OrderRequest < ActiveRecord::Base
   belongs_to :event, primary_key: "sfid", foreign_key: "i_m__to_event__c"
 
   validates_presence_of :account, :request_bom, :event
+
+  scope :belongs_to_overlap, lambda { |event| where(i_m__to_event__c: event.overlapping.pluck(:sfid)) }
+
+  def get_related_items
+    self.request_bom.items.uniq
+  end
+
+  def self.get_related_entities(sfids)
+    OrderRequest.where(sfid: sfids).map { |order_request| order_request.request_bom.request_entities }.flatten
+  end
   
-  private
-  
-  def start_date_has_to_be_before_end_date
-    if self.i_m__start_date__c.present? && self.i_m__end_date__c.present? && self.i_m__start_date__c > self.i_m__end_date__c
-      errors.add(:date_error, "start date can't be before end date'")
-    end
-  end    
 end
