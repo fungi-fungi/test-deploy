@@ -38,6 +38,13 @@ RSpec.describe Event, type: :model do
     expect(build(:event, i_m__city__c: nil)).not_to be_valid
   end
 
+  it "returns all overlaping events" do
+    number_of_overlaping_evants = 3
+    number_possible_overlap_cases = 4
+    create(:event_overlap, overlap_amount: number_of_overlaping_evants, non_overlap_amount: 10)
+    expect(Event.first.overlapping.count).to be_equal(number_of_overlaping_evants * number_possible_overlap_cases + 1)
+  end
+
   it "can be saved" do
     old_size = Event.all.size
     create(:event)
