@@ -1,5 +1,13 @@
 class Api::V1::StockItemSerializer < ActiveModel::Serializer
-  attributes :id, :sfid, :name, :amount, :created_at
+  attributes :id, :sfid, :item, :name, :amount, :created_at
+
+  def item
+    object.item.sfid
+  end
+
+  def name
+    object.item.name
+  end
 
   def amount
   	object.i_m__amount__c

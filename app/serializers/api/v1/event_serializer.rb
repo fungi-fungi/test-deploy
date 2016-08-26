@@ -1,5 +1,5 @@
 class Api::V1::EventSerializer < ActiveModel::Serializer
-  attributes :id, :startDate, :endDate, :city, :venue
+  attributes :id, :sfid, :name, :startDate, :endDate, :city, :venue
   
   def venue 
     object.account.name
