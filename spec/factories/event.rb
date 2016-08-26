@@ -3,8 +3,8 @@ FactoryGirl.define do
     f.name                        { "SE-#{Faker::Number.number(5)}" }
     f.sfid                        { Faker::Number.number(10) }
     f.i_m__city__c                { Faker::Address.city }
-    f.i_m__start_date__c          { Faker::Time.between(12.days.ago, 7.days.ago) }
-    f.i_m__end_date__c            { Faker::Time.between(4.days.ago, Date.today) }
+    f.i_m__start_date__c          { Faker::Time.between(20.days.ago, 15.days.ago) }
+    f.i_m__end_date__c            { Faker::Time.between(10.days.ago, Date.today) }
     association                   :account, factory: :account_venue
 
     factory :event_overlap do 
@@ -29,6 +29,7 @@ FactoryGirl.define do
             i_m__end_date__c: Faker::Time.between(event.i_m__start_date__c + 1.day, event.i_m__end_date__c - 1.day)
           )
 
+          # In
           create(
             :event,
             account: event.account,
