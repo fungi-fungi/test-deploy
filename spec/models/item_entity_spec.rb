@@ -31,4 +31,29 @@ RSpec.describe ItemEntity, type: :model do
     create(:item_entity)
     expect(ItemEntity.all.size).to eq(old_size + 1)
   end
+
+  context "map transformation" do
+    Number_OF_ENTITIES = 10
+    let(:result_map) { ItemEntity.build_item_id_map(data) }
+    let(:data) { create_list(:item_entity, Number_OF_ENTITIES) }
+    
+    it "test data is not empty" do
+      expect(result_map.size).not_to be_equal(0)
+      expect(Item.all.size).not_to be_equal(0)
+      expect(ItemEntity.all.size).not_to be_equal(0)
+    end
+  
+    it "has correct number of elements" do
+      expect(result_map.size).to be_equal(Number_OF_ENTITIES)
+    end
+
+    it "has correct keys in hash" do
+      expect(result_map.keys).to match_array(Item.pluck(:sfid))
+    end
+
+    it "has correct values in hash" do
+      expect(result_map.values).to match_array(ItemEntity.all)
+    end
+  end
+
 end

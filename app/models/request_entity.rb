@@ -7,4 +7,8 @@ class RequestEntity < ActiveRecord::Base
   validates_presence_of :name, :i_m__amount__c, :item, :request_bom
   validates_numericality_of :i_m__amount__c, greater_than: 0
 
+  def self.build_item_id_map(collection)
+    collection.inject(Hash.new) {|hash, el| hash[el.i_m__to_item__c] = el; hash }
+  end
+
 end
