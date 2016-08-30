@@ -33,18 +33,24 @@ RSpec.describe ItemEntity, type: :model do
   end
 
   context "map transformation" do
-    Number_OF_ENTITIES = 10
-    let(:result_map) { ItemEntity.build_item_id_map(data) }
-    let(:data) { create_list(:item_entity, Number_OF_ENTITIES) }
+    NUMBER_OF_ENTITIES = 10
+
+    let(:entities) { ItemEntity.all }
+    let(:result_map) { ItemEntity.build_item_id_map(entities) }
+    
+    before do
+      create_list(:item_entities_with_duplicates, NUMBER_OF_ENTITIES)
+    end
     
     it "test data is not empty" do
       expect(result_map.size).not_to be_equal(0)
       expect(Item.all.size).not_to be_equal(0)
-      expect(ItemEntity.all.size).not_to be_equal(0)
+      expect(entities.size).not_to be_equal(0)
+      expect(entities.size).not_to be_equal(NUMBER_OF_ENTITIES)
     end
   
     it "has correct number of elements" do
-      expect(result_map.size).to be_equal(Number_OF_ENTITIES)
+      expect(result_map.size).to be_equal(NUMBER_OF_ENTITIES)
     end
 
     it "has correct keys in hash" do
@@ -52,8 +58,16 @@ RSpec.describe ItemEntity, type: :model do
     end
 
     it "has correct values in hash" do
-      expect(result_map.values).to match_array(ItemEntity.all)
+      expect(result_map.values).not_to match_array(entities.pluck(:i_m__amount__c))
     end
+
+    it "has correct values in hash" do
+
+      res = entities.select(:i_m__to_item__c, :i_m__amount__c).group(:i_m__to_item__c).sum(:i_m__amount__c)
+
+      expect(result_map.values).to match_array(res.values)
+    end
+
   end
 
 end

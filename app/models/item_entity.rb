@@ -7,7 +7,10 @@ class ItemEntity < ActiveRecord::Base
   validates_presence_of :sfid, :name, :i_m__amount__c, :bom, :item
 
   def self.build_item_id_map(collection)
-    collection.inject(Hash.new) {|hash, el| hash[el.i_m__to_item__c] = el; hash }
+    ItemEntity.all.inject(Hash.new) do |hash, el|
+      hash.has_key?(el.i_m__to_item__c) ? hash[el.i_m__to_item__c] = hash[el.i_m__to_item__c] + el.i_m__amount__c : hash[el.i_m__to_item__c] = el.i_m__amount__c
+      hash
+    end
   end
 
 end
