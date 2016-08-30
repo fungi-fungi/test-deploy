@@ -16,7 +16,7 @@ FactoryGirl.define do
     end
 
     factory :category_belongs_to_iurii, traits: [:iurii_configurations]
-    factory :category_with_sets, traits: [:with_sets]
+    factory :configuration_with_sets, traits: [:with_sets]
 
   end
 end

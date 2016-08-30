@@ -37,16 +37,24 @@ RSpec.describe Configuration, type: :model do
     let(:configuration) { FactoryGirl.create(:configuration) }
 
     before do
-      FactoryGirl.create(:category_with_sets)
+      FactoryGirl.create(:configuration_with_sets)
       FactoryGirl.create_list(:item_entity, NUMBER_OF_ITEMS, bom: configuration.bom)
     end
 
-    it "all related items" do
+    it "correct number of related items" do
       expect(configuration.get_related_items.count).to be_equal(NUMBER_OF_ITEMS)
     end
 
-    it "all related entities" do
+    it "correct related items" do
+      expect(configuration.get_related_items.pluck(:sfid)).to match_array(ItemEntity.where(bom: configuration.bom).pluck(:i_m__to_item__c))
+    end
+
+    it "correct number of related entities" do
       expect(configuration.get_related_entities.count).to be_equal(NUMBER_OF_ITEMS)
+    end
+
+    it "correct related entities" do
+      expect(configuration.get_related_entities.pluck(:sfid)).to match_array(ItemEntity.where(bom: configuration.bom).pluck(:sfid))
     end
   end
 
