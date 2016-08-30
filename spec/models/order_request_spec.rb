@@ -27,11 +27,13 @@ RSpec.describe OrderRequest, type: :model do
   context "model returns all" do
     ITEMS_IN_FIRST = 15
     ITMS_IN_SECOND = 3
+    
     let(:event) { FactoryGirl.create(:event_overlap, overlap_amount: 1, non_overlap_amount: 3) }
     let(:non_overlapping) { Event.where.not(id: event.overlapping.pluck(:id)) }
     
     let(:order_request) { FactoryGirl.create(:order_request, event: event) }
     let(:second_order_request) { FactoryGirl.create(:order_request, event: event.overlapping.second) }
+    let(:orders_sfids) { [order_request.sfid, second_order_request.sfid] }
 
     before do
       FactoryGirl.create(:order_request_with_sets, event: non_overlapping.first)
@@ -48,8 +50,7 @@ RSpec.describe OrderRequest, type: :model do
     end
 
     it "entities for array of sfids" do
-      sfids = [order_request.sfid, second_order_request.sfid]
-      expect(OrderRequest.get_related_entities(sfids).count).to be_equal(ITEMS_IN_FIRST + ITMS_IN_SECOND)
+      expect(OrderRequest.get_related_entities(orders_sfids).count).to be_equal(ITEMS_IN_FIRST + ITMS_IN_SECOND)
     end
 
     it "entities for empty object" do
