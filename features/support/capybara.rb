@@ -7,7 +7,7 @@ require 'capybara/poltergeist'
 include Capybara::Angular::DSL
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, :browser => :phantomjs)
+  Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path, js_errors: true)
 end
 
 Capybara.javascript_driver = :poltergeist

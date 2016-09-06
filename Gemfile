@@ -21,16 +21,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'dotenv-rails'
   gem 'guard-rspec'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :test do
   gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
   gem 'capybara'
   gem 'poltergeist'
   gem 'phantomjs'
-  gem 'faker'
-  gem 'factory_girl_rails'
   gem 'capybara-angular'
   gem 'simplecov', require: false
   gem 'codacy-coverage', require: false
