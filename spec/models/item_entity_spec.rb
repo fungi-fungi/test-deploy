@@ -33,24 +33,24 @@ RSpec.describe ItemEntity, type: :model do
   end
 
   context "map transformation" do
-    NUMBER_OF_ENTITIES = 10
-
-    let(:entities) { ItemEntity.all }
-    let(:result_map) { ItemEntity.build_item_id_map(entities) }
     
     before do
-      create_list(:item_entities_with_duplicates, NUMBER_OF_ENTITIES)
+      @number_of_entities = 10
+      create_list(:item_entities_with_duplicates, @number_of_entities)
     end
+
+    let(:entities) { ItemEntity.all }
+    let(:result_map) { ItemEntity.build_item_id_map(entities) }   
     
     it "test data is not empty" do
       expect(result_map.size).not_to be_equal(0)
       expect(Item.all.size).not_to be_equal(0)
       expect(entities.size).not_to be_equal(0)
-      expect(entities.size).not_to be_equal(NUMBER_OF_ENTITIES)
+      expect(entities.size).not_to be_equal(@number_of_entities)
     end
   
     it "has correct number of elements" do
-      expect(result_map.size).to be_equal(NUMBER_OF_ENTITIES)
+      expect(result_map.size).to be_equal(@number_of_entities)
     end
 
     it "has correct keys in hash" do

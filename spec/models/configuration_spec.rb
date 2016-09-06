@@ -33,16 +33,16 @@ RSpec.describe Configuration, type: :model do
   end
 
   context 'model returns' do
-    NUMBER_OF_ITEMS = 15
+    before { @number_of_items = 15 }
     let(:configuration) { FactoryGirl.create(:configuration) }
 
     before do
       FactoryGirl.create(:configuration_with_sets)
-      FactoryGirl.create_list(:item_entity, NUMBER_OF_ITEMS, bom: configuration.bom)
+      FactoryGirl.create_list(:item_entity, @number_of_items, bom: configuration.bom)
     end
 
     it "correct number of related items" do
-      expect(configuration.get_related_items.count).to be_equal(NUMBER_OF_ITEMS)
+      expect(configuration.get_related_items.count).to be_equal(@number_of_items)
     end
 
     it "correct related items" do
@@ -50,7 +50,7 @@ RSpec.describe Configuration, type: :model do
     end
 
     it "correct number of related entities" do
-      expect(configuration.get_related_entities.count).to be_equal(NUMBER_OF_ITEMS)
+      expect(configuration.get_related_entities.count).to be_equal(@number_of_items)
     end
 
     it "correct related entities" do
