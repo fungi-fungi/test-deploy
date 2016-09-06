@@ -11,7 +11,6 @@ FactoryGirl.define do
     trait :iurii_stock_items do
       association :account, Account.where(sfid: '0013600000NSyCRAA1').first
     end
-
-    factory :stock_items_belongs_to_iurii, traits: [:iurii_stock_items]
-    end
+  
+  end
 end

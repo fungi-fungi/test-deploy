@@ -15,7 +15,4 @@ FactoryGirl.define do
     factory :account_client, traits: [:client]
   end
 
-  def get_account_by_sfid(sfid)
-    Account.where(sfid: sfid).first || Factory(:account, sfid: sfid)
-  end
 end

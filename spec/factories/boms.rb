@@ -25,21 +25,6 @@ FactoryGirl.define do
 
       end 
     end
-
-    factory :bom_for_exisiting_items do
-
-      transient do
-        existing_items []
-      end
-
-      after(:create) do |bom, evaluator|
-
-        evaluator.existing_items.each do |item|
-          create(:item_entity, bom: bom, item: item )
-        end
-
-      end 
-    end
     
   end
 end
