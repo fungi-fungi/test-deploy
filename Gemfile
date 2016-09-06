@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.5'
 
 gem 'rails', '4.2.5.1'
 gem 'pg', '>= 0.19.0.beta'
@@ -15,6 +16,7 @@ gem 'knock', '~> 1.4.2'
 gem 'active_model_serializers', '~> 0.10.2'
 gem 'api-pagination'
 gem 'will_paginate'
+gem 'net-ssh', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
