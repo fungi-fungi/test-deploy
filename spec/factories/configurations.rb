@@ -7,7 +7,7 @@ FactoryGirl.define do
     association   :category_set, factory: :category_set
 
     trait :iurii_configurations do
-      account { Account.where(sfid: '0013600000NSyCRAA1').first }
+      account { Account.first_or_create(sfid: '0013600000NSyCRAA1') }
     end
 
     trait :with_sets do
@@ -16,7 +16,9 @@ FactoryGirl.define do
     end
 
     factory :configuration_belongs_to_iurii, traits: [:iurii_configurations]
-    factory :configuration_with_sets, traits: [:iurii_configurations, :with_sets]
+    factory :configuration_with_sets_iurii, traits: [:iurii_configurations, :with_sets]
+    factory :configuration_with_sets, traits: [:with_sets]
+    
 
   end
 end

@@ -7,7 +7,7 @@ FactoryGirl.define do
     association             :request_bom
 
     trait :iurii_order_request do
-      account { Account.where(sfid: '0013600000NSyCRAA1').first }
+      account { Account.first_or_create(sfid: '0013600000NSyCRAA1') }
     end
 
     trait :order_request_with_sets do
