@@ -1,7 +1,7 @@
 == README
 
 {<img src="https://codeship.com/projects/fd3b3d70-1b2b-0134-3aa2-66ed86225da0/status?branch=master" alt="Status?branch=master" />}[https://codeship.com/projects/163365]
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6773bc69bb96425c9632dcb284b23c35)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fungi-fungi/test-deploy&amp;utm_campaign=Badge_Grade)
+{<img src="https://api.codacy.com/project/badge/Grade/6773bc69bb96425c9632dcb284b23c35" alt="Codacy code quality" />}[https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=fungi-fungi/test-deploy&utm_campaign=Badge_Grade]
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
