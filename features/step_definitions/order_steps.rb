@@ -1,5 +1,5 @@
 Given(/^I have (\d+) avaliable configuration$/) do |arg1|
-  FactoryGirl.create_list(:category_with_sets, arg1.to_i, account: Account.where(sfid: '0013600000NSyCRAA1').first)
+  FactoryGirl.create_list(:configuration_belongs_to_iurii, arg1.to_i)
 end
 
 When(/^I go to Configuration page$/) do
@@ -13,7 +13,7 @@ Then(/^I can see (\d+) avaliable configurations$/) do |arg1|
 end
 
 Given(/^I have (\d+) previous orders$/) do |arg1|
-  FactoryGirl.create_list(:order_with_sfid, arg1.to_i, account: Account.where(sfid: '0013600000NSyCRAA1').first)
+  FactoryGirl.create_list(:order_request_with_sets_iurii, arg1.to_i)
 end
 
 When(/^I go to Orders page$/) do

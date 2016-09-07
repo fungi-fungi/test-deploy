@@ -9,8 +9,10 @@ FactoryGirl.define do
     association           :item, factory: :item
 
     trait :iurii_stock_items do
-      association :account, Account.where(sfid: '0013600000NSyCRAA1').first
+      account { Account.first_or_create(sfid: '0013600000NSyCRAA1') }
     end
+
+    factory :stock_item_belongs_to_iurii, traits: [:iurii_stock_items] 
   
   end
 end

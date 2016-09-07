@@ -9,5 +9,4 @@ Feature: Inventory
   Scenario: View my inventory
     Given I am on my profile page
     When I go to Inventory page
-    And I request my inventory
     Then I can see 10 items in my inventory
