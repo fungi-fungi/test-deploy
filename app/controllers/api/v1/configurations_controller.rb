@@ -6,6 +6,6 @@ class Api::V1::ConfigurationsController < Api::V1::BaseController
 
   def show
     @configuration = client.configurations.where(id: params[:id]).first
-    render json: @configuration, serializer: Api::V1::ConfigurationDetailsSerializer, include: '**'
+    render json: @configuration, serializer: Api::V1::ConfigurationDetailsSerializer, include: 'account, bom.item_entities.item, category_set.category_entities.category'
   end
 end
