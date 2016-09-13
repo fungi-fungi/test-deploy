@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.3.1'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.7'
 gem 'pg', '>= 0.19.0.beta'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -16,7 +16,6 @@ gem 'knock', '~> 1.4.2'
 gem 'active_model_serializers', '~> 0.10.2'
 gem 'api-pagination'
 gem 'will_paginate'
-gem 'net-ssh', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
