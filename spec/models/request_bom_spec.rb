@@ -6,10 +6,6 @@ RSpec.describe RequestBom, type: :model do
     expect(build(:request_bom)).to be_valid
   end
 
-  it "is invalid without a name" do
-    expect(build(:request_bom, name: nil)).not_to be_valid
-  end
-
   it "new instance will have external id" do
     expect(create(:request_bom).i_m__externalid__c).not_to be_nil
   end

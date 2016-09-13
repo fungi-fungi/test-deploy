@@ -62,6 +62,95 @@ RSpec.describe Api::V1::OrderRequestsController, :type => :controller do
 
       end
 
+      describe '#create' do
+
+        let(:event) { FactoryGirl.create(:event) }
+        let(:created_entities) { FactoryGirl.create_list(:item_entity, 10) }
+        let(:entities) { created_entities.map { |entity| {item: entity.item.sfid, amount: entity.i_m__amount__c} } }
+        let(:new_order_request) { OrderRequest.last }
+        let(:new_request_bom) { RequestBom.last }
+        let(:order_date) { {order: {entities: entities, event: event.sfid}} }
+      
+        it "when request is empty" do
+          post :create, {}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "when entities is nil" do
+          post :create, {order: {event: event.sfid, entities: nil}}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "when request has no items" do
+          post :create, {order: {event: event.sfid}}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "when request has no event" do
+          post :create, {order: {entities: entities}}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "when event is not valid" do
+          post :create, {order: {entities: entities, event: ""}}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "when event is nil" do
+          post :create, {order: {entities: entities, event: nil}}
+          expect(response).to have_http_status(:bad_request)
+        end
+        
+        it "when list of entities is empty" do
+          post :create, {order: {entities: [], event: event.sfid}}
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "returns correct code" do
+          post :create, order_date
+          expect(response).to have_http_status(:created)
+        end
+
+        it "returns new request order" do
+          post :create, order_date
+          expect(response.body).to eq(Api::V1::OrderRequestSerializer.new(new_order_request).to_json)
+        end
+
+        it "creates a new order request" do
+          number_of_order_request = OrderRequest.all.size
+          post :create, order_date
+          expect(OrderRequest.all.size).to eq(number_of_order_request + 1)
+        end
+        
+        it "creates a new request bom" do
+          number_of_request_boms = RequestBom.all.size
+          post :create, order_date
+          expect(RequestBom.all.size).to eq(number_of_request_boms + 1)
+        end
+
+        it "creates request entity for each item" do
+          number_of_request_entities = RequestEntity.all.size
+          post :create, order_date
+          expect(RequestEntity.all.size).to eq(number_of_request_entities + entities.size)
+        end
+
+        it "new order request has correct bom" do
+          post :create, order_date
+          expect(new_order_request.request_bom).to eq(new_request_bom)
+        end
+
+        it "new order request has correct event" do
+          post :create, order_date
+          expect(new_order_request.event).to eq(event)
+        end
+
+        it "new request bom has correct amount of entities" do
+          post :create, order_date
+          expect(new_request_bom.request_entities.size).to eq(entities.size)
+        end
+
+      end
+
     end
 
   end

@@ -25,32 +25,35 @@ RSpec.describe OrderRequest, type: :model do
   end
 
   context "model returns all" do
-    ITEMS_IN_FIRST = 15
-    ITMS_IN_SECOND = 3
+
+    before do
+      @items_in_first = 15
+      @items_in_second = 3
+      @overlap_amount = 1
+      @non_overlap_amount = 3
+
+      FactoryGirl.create(:order_request_with_sets, event: non_overlapping.first)
+      FactoryGirl.create_list(:request_entity, @items_in_first, request_bom: order_request.request_bom)
+      FactoryGirl.create_list(:request_entity, @items_in_second, request_bom: second_order_request.request_bom)
+    end
     
-    let(:event) { FactoryGirl.create(:event_overlap, overlap_amount: 1, non_overlap_amount: 3) }
+    let(:event) { FactoryGirl.create(:event_overlap, overlap_amount: @overlap_amount, non_overlap_amount: @non_overlap_amount) }
     let(:non_overlapping) { Event.where.not(id: event.overlapping.pluck(:id)) }
     
     let(:order_request) { FactoryGirl.create(:order_request, event: event) }
     let(:second_order_request) { FactoryGirl.create(:order_request, event: event.overlapping.second) }
     let(:orders_sfids) { [order_request.sfid, second_order_request.sfid] }
 
-    before do
-      FactoryGirl.create(:order_request_with_sets, event: non_overlapping.first)
-      FactoryGirl.create_list(:request_entity, ITEMS_IN_FIRST, request_bom: order_request.request_bom)
-      FactoryGirl.create_list(:request_entity, ITMS_IN_SECOND, request_bom: second_order_request.request_bom)
-    end
-
     it "items for order request" do
-      expect(order_request.get_related_items.count).to be_equal(ITEMS_IN_FIRST)
+      expect(order_request.get_related_items.count).to be_equal(@items_in_first)
     end
 
     it "entities for single sfid" do
-      expect(OrderRequest.get_related_entities(order_request.sfid).count).to be_equal(ITEMS_IN_FIRST)
+      expect(OrderRequest.get_related_entities(order_request.sfid).count).to be_equal(@items_in_first)
     end
 
     it "entities for array of sfids" do
-      expect(OrderRequest.get_related_entities(orders_sfids).count).to be_equal(ITEMS_IN_FIRST + ITMS_IN_SECOND)
+      expect(OrderRequest.get_related_entities(orders_sfids).count).to be_equal(@items_in_first + @items_in_second)
     end
 
     it "entities for empty object" do

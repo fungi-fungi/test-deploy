@@ -5,6 +5,7 @@ class OrderRequest < ActiveRecord::Base
   belongs_to :request_bom, primary_key: "i_m__externalid__c", foreign_key: "i_m__to_request_bom__r__i_m__externalid__c"
   belongs_to :event, primary_key: "sfid", foreign_key: "i_m__to_event__c"
 
+  validates_associated :account, :request_bom, :event
   validates_presence_of :account, :request_bom, :event
 
   scope :belongs_to_overlap, lambda { |event| where(i_m__to_event__c: event.overlapping.pluck(:sfid)) }

@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
 
     render json: { message: message, errors: errors}, status: status
   end
+
+  rescue_from ActionController::ParameterMissing do |exception|
+    render json: exception, status: 400
+  end
+
+
 end

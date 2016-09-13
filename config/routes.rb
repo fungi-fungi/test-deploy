@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :configurations, only: [:index, :show]
       resources :orders, only: [:index, :show, :create]
       resources :events, only: [:index, :show]
-      resources :order_requests, only: [:index, :show]
+      resources :order_requests, only: [:index, :show, :create]
     end
   end
 

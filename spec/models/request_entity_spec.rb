@@ -6,10 +6,6 @@ RSpec.describe RequestEntity, type: :model do
     expect(build(:request_entity)).to be_valid
   end
 
-  it "is invalid without name" do
-    expect(build(:request_entity, name: nil)).not_to be_valid
-  end
-
   it "is invalid without amount" do
     expect(build(:request_entity, i_m__amount__c: nil)).not_to be_valid
   end

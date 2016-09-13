@@ -4,7 +4,7 @@ class RequestEntity < ActiveRecord::Base
   belongs_to :request_bom, primary_key: 'i_m__externalid__c', foreign_key: 'i_m__to_request_bom__r__i_m__externalid__c'
   belongs_to :item, primary_key: 'sfid', foreign_key: 'i_m__to_item__c'
   
-  validates_presence_of :name, :i_m__amount__c, :item, :request_bom
+  validates_presence_of :i_m__amount__c, :item, :request_bom
   validates_numericality_of :i_m__amount__c, greater_than: 0
 
   def self.build_item_id_map(collection)
