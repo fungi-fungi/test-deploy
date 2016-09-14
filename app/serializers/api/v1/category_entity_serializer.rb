@@ -1,6 +1,6 @@
 class Api::V1::CategoryEntitySerializer < ActiveModel::Serializer
-  attributes :id, :sfid, :name , :createddate
+  attributes :id, :sfid, :createddate
   
-  belongs_to :category
+  belongs_to :category, serializer: Api::V1::CategorySerializer
   
 end
