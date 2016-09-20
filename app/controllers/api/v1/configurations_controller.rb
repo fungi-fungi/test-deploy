@@ -5,7 +5,13 @@ class Api::V1::ConfigurationsController < Api::V1::BaseController
   end
 
   def show
-    @configuration = client.configurations.where(id: params[:id]).first
-    render json: @configuration, serializer: Api::V1::ConfigurationDetailsSerializer
+    configuration = client.configurations.find(params[:id])
+    render json: configuration, serializer: Api::V1::ConfigurationDetailsSerializer, include: '**'
   end
+
+  def search
+    configurations = ::Configuration.search_by_name(client, params[:name])
+    paginate json: configurations, each_serializer: Api::V1::ConfigurationSerializer
+  end
+
 end
