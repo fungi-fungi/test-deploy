@@ -12,7 +12,6 @@ Rails.application.routes.draw do
         end
       end
 
-
       resources :events, only: [:index, :show] do
         collection do
           get 'search'
@@ -27,14 +26,20 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :avaliable_stock do
-        resources :events, only: [:show] do
-          resources :categories, only: [:show]
-          resources :configurations, only: [:show]
+      resources :boms, only: [:show] do
+        member do
+          get 'stock'
         end
       end
-      
+
+      resources :category_sets, only: [:show] do
+        member do
+          get 'stock'
+        end
+      end
+
     end
+    
   end
   match '*unmatched_route', :to => 'errors#routing', :via => :all
 end

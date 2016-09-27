@@ -19,8 +19,8 @@ FactoryGirl.define do
 
       after(:create) do |bom, evaluator|
 
-        evaluator.amount_of_items.times do |item|
-          create(:item_entity, bom: bom, item: evaluator.existing_items.sample )
+        evaluator.amount_of_items.times do |i|
+          create(:item_entity, bom: bom, item: evaluator.existing_items[i] )
         end
 
       end 
