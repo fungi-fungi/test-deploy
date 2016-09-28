@@ -66,10 +66,10 @@ RSpec.describe Api::V1::OrderRequestsController, :type => :controller do
 
         let(:event) { FactoryGirl.create(:event) }
         let(:created_entities) { FactoryGirl.create_list(:item_entity, 10) }
-        let(:entities) { created_entities.map { |entity| {item: entity.item.sfid, amount: entity.i_m__amount__c} } }
+        let(:entities) { created_entities.map { |entity| { item: entity.item.sfid, amount: entity.i_m__amount__c } } }
         let(:new_order_request) { OrderRequest.last }
         let(:new_request_bom) { RequestBom.last }
-        let(:order_date) { {order: {entities: entities, event: event.sfid}} }
+        let(:order_date) { { order: { entities: entities, event: event.sfid } } }
       
         it "when request is empty" do
           post :create, {}
@@ -77,32 +77,32 @@ RSpec.describe Api::V1::OrderRequestsController, :type => :controller do
         end
 
         it "when entities is nil" do
-          post :create, {order: {event: event.sfid, entities: nil}}
+          post :create, { order: { event: event.sfid, entities: nil } }
           expect(response).to have_http_status(:bad_request)
         end
 
         it "when request has no items" do
-          post :create, {order: {event: event.sfid}}
+          post :create, { order: { event: event.sfid } }
           expect(response).to have_http_status(:bad_request)
         end
 
         it "when request has no event" do
-          post :create, {order: {entities: entities}}
+          post :create, { order: { entities: entities } }
           expect(response).to have_http_status(:bad_request)
         end
 
         it "when event is not valid" do
-          post :create, {order: {entities: entities, event: ""}}
+          post :create, { order: { entities: entities, event: "" } }
           expect(response).to have_http_status(:bad_request)
         end
 
         it "when event is nil" do
-          post :create, {order: {entities: entities, event: nil}}
+          post :create, { order: { entities: entities, event: nil } }
           expect(response).to have_http_status(:bad_request)
         end
         
         it "when list of entities is empty" do
-          post :create, {order: {entities: [], event: event.sfid}}
+          post :create, { order: { entities: [], event: event.sfid } }
           expect(response).to have_http_status(:bad_request)
         end
 

@@ -10,23 +10,17 @@ class Api::V1::OrderRequestsController < Api::V1::BaseController
   end
 
   def create
-    # begin
-      order = OrderRequest.new
-      order.build_request_bom({ request_entities_attributes: transform_entities })
-      order.event = Event.find_by(sfid: new_order_params[:event])
-      order.account = client
-      
-      if order.valid?
-        order.save
-        render json: order, serializer: Api::V1::OrderRequestSerializer, status: :created
-      else
-        render json: order.errors.to_json, status: :bad_request
-      end
-
-    # rescue Exception => e
-    #   puts "ER__1: #{e.to_json}"
-    #   render json: e.to_json, status: 400
-    # end
+    order = OrderRequest.new
+    order.build_request_bom({ request_entities_attributes: transform_entities })
+    order.event = Event.find_by(sfid: new_order_params[:event])
+    order.account = client
+    
+    if order.valid?
+      order.save
+      render json: order, serializer: Api::V1::OrderRequestSerializer, status: :created
+    else
+      render json: order.errors.to_json, status: :bad_request
+    end
   end
 
   private
