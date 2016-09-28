@@ -7,35 +7,25 @@ Rails.application.routes.draw do
       resources :order_requests, only: [:index, :show, :create]
       
       resources :configurations, only: [:index, :show] do
-        collection do
-          get 'search'
-        end
+        get 'search', on: :collection
       end
 
       resources :events, only: [:index, :show] do
-        collection do
-          get 'search'
-        end
+        get 'search', on: :collection
       end
 
       scope :rentails do
         resources :events, only: [:show] do
-          collection do
-            get 'suggested'
-          end
+          get 'suggested', on: :collection
         end
       end
 
       resources :boms, only: [:show] do
-        member do
-          get 'stock'
-        end
+        get 'stock', on: :member
       end
 
       resources :category_sets, only: [:show] do
-        member do
-          get 'stock'
-        end
+        get 'stock', on: :member
       end
 
     end
