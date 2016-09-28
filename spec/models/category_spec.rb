@@ -14,10 +14,6 @@ RSpec.describe Category, type: :model do
     expect(build(:category, name: nil)).not_to be_valid
   end
 
-  it "is invalid without external index" do
-    expect(build(:category, i_m__externalid__c: nil)).not_to be_valid
-  end
-
   it "can be saved" do
     old_size = Category.all.size
     create(:category)
