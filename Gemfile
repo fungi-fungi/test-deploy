@@ -16,6 +16,7 @@ gem 'knock', '~> 1.4.2'
 gem 'active_model_serializers', '~> 0.10.2'
 gem 'api-pagination'
 gem 'will_paginate'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'byebug'
