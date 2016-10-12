@@ -119,10 +119,11 @@ RSpec.describe Api::V1::ConfigurationsController, :type => :controller do
 
     describe "#show" do
 
+      let(:presigned_link) { "https://something.jpg" }
       let(:configuration) { FactoryGirl.create(:configuration, account: @account) }
 
       before(:each) do
-        Aws::S3::Presigner.any_instance.stub(:presigned_url).and_return("something")
+        allow_any_instance_of(Aws::S3::Presigner).to receive(:presigned_url).and_return(presigned_link)
       end
 
       it "shows the resource" do
