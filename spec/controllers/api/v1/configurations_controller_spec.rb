@@ -121,6 +121,10 @@ RSpec.describe Api::V1::ConfigurationsController, :type => :controller do
 
       let(:configuration) { FactoryGirl.create(:configuration, account: @account) }
 
+      before(:each) do
+        Aws::S3::Presigner.any_instance.stub(:presigned_url).and_return("something")
+      end
+
       it "shows the resource" do
         get :show, id: configuration.id
         expect(response.body).to eq(Api::V1::ConfigurationDetailsSerializer.new(configuration).to_json)
