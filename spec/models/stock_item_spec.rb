@@ -22,10 +22,6 @@ RSpec.describe StockItem, type: :model do
     expect(build(:stock_item, account: nil)).not_to be_valid
   end
 
-  it "is invalid without location" do
-    expect(build(:stock_item, i_m__location__c: nil)).not_to be_valid
-  end
-
   it "is invalid without amount" do
     expect(build(:stock_item, i_m__amount__c: nil)).not_to be_valid
   end
