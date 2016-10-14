@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "i_m__to_request_bom__r__i_m__externalid__c", limit: 10
     t.string   "_hc_lastop",                                 limit: 32
     t.string   "name",                                       limit: 80
+    t.string   "i_m__provider__c",                           limit: 20
     t.string   "i_m__to_request_bom__c",                     limit: 18
     t.text     "_hc_err"
   end

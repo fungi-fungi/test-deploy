@@ -26,11 +26,11 @@ class Api::V1::OrderRequestsController < Api::V1::BaseController
   private
   
   def new_order_params
-    params.require(:order).permit(:event, entities: [:amount, :item]).delete_if { |k,v| v.nil? || v.empty? }
+    params.require(:order).permit(:event, entities: [:amount, :sfid, :provider]).delete_if { |k,v| v.nil? || v.empty? }
   end
 
   def transform_entities
-    new_order_params.fetch(:entities).map { |entity| { i_m__amount__c: entity[:amount], i_m__to_item__c: entity[:item] } } unless new_order_params.fetch(:entities).nil?
+    new_order_params.fetch(:entities).map { |entity| { i_m__amount__c: entity[:amount], i_m__to_item__c: entity[:sfid], i_m__provider__c: entity[:provider] } } unless new_order_params.fetch(:entities).nil?
   end
 
 end
