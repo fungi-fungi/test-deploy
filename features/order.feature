@@ -18,9 +18,9 @@ Feature: Ordering
     When I go to Orders page
     Then I can see 5 orders
 
-  @javascript
-  Scenario: I can view all elements required for configuration
-    Given I am on my profile page
-    When I go to Configuration page
-    And click on detail for random category
-    Then I can see all elements required for configuration
+  # @javascript
+  # Scenario: I can view all elements required for configuration
+  #   Given I am on my profile page
+  #   When I go to Configuration page
+  #   And click on detail for random category
+  #   Then I can see all elements required for configuration

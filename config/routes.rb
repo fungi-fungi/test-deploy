@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :stock_items, only: [:index, :show]
       
       resources :order_requests, only: [:index, :show, :create]
+
+      resources :items, only: [:show] do
+        get 'rental', on: :collection
+      end
       
       resources :configurations, only: [:index, :show] do
         get 'search', on: :collection
@@ -14,10 +18,6 @@ Rails.application.routes.draw do
         get 'search', on: :collection
       end
 
-      scope :rentails do
-        resources :events, only: [:show] do
-          get 'suggested', on: :collection
-        end
       resources :rentals, only: [:index] do
         get 'suggested', on: :collection
       end
