@@ -30,6 +30,10 @@ Rails.application.routes.draw do
         get 'stock', on: :member
       end
 
+      resources :categories, only: [:show] do
+        get 'stock', on: :member
+      end
+
     end
     
   end
