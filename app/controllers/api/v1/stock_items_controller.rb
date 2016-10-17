@@ -1,7 +1,13 @@
 class Api::V1::StockItemsController < Api::V1::BaseController
 
   def index
-    paginate json: client.stock_items, each_serializer: Api::V1::StockItemSerializer
+    if params[:category_id]
+      category = Category.find(params[:category_id])
+      # event = Event.find(params[:event_id])
+      paginate json: StockItem.for_account(client).for_category(category), each_serializer: Api::V1::StockItemSerializer
+    else
+      paginate json: StockItem.for_account(client), each_serializer: Api::V1::StockItemSerializer
+    end
   end
 
   def show
