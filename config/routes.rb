@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         resources :events, only: [:show] do
           get 'suggested', on: :collection
         end
+      resources :rentals, only: [:index] do
+        get 'suggested', on: :collection
       end
 
       resources :boms, only: [:show] do
