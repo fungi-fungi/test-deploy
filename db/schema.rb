@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "i_m__to_request_bom__r__i_m__externalid__c", limit: 10
     t.string   "i_m__to_request_bom__c",                     limit: 18
     t.string   "_hc_lastop",                                 limit: 32
+    t.string   "i_m__to_configuration__c",                   limit: 18
   end
 
   add_index "i_m__order_request__c", ["i_m__to_account__c"], name: "hc_idx_i_m__order_request__c_i_m__to_account__c", using: :btree
@@ -328,9 +329,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "i_m__to_request_bom__r__i_m__externalid__c", limit: 10
     t.string   "_hc_lastop",                                 limit: 32
     t.string   "name",                                       limit: 80
-    t.string   "i_m__provider__c",                           limit: 20
     t.string   "i_m__to_request_bom__c",                     limit: 18
     t.text     "_hc_err"
+    t.string   "i_m__provider__c",                           limit: 20
   end
 
   add_index "i_m__request_entity__c", ["i_m__to_item__c"], name: "hc_idx_i_m__request_entity__c_i_m__to_item__c", using: :btree
