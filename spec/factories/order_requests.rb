@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  factory :order_request do |f|
-    f.name                  { "REQ-#{Faker::Number.number(5)}" }
-    f.sfid                  { Faker::Number.number(10) }
-    association             :account
-    association             :event
-    association             :request_bom
+  factory :order_request do
+    name                  { "REQ-#{Faker::Number.number(5)}" }
+    sfid                  { Faker::Number.number(10) }
+    association           :account
+    association           :event
+    association           :request_bom
 
     trait :iurii_order_request do
       account { Account.first_or_create(sfid: '0013600000NSyCRAA1') }

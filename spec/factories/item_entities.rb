@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  factory :item_entity do |f|
-    f.sfid              { Faker::Number.number(10) }
-    f.name              { "IMI-#{Faker::Number.number(5)}" }
-    f.i_m__amount__c    { Faker::Number.number(3) }
-    association         :bom, factory: :bom
-    association         :item, factory: :item
+  factory :item_entity do
+    sfid              { Faker::Number.number(10) }
+    name              { "IMI-#{Faker::Number.number(5)}" }
+    i_m__amount__c    { Faker::Number.number(3) }
+    association       :bom, factory: :bom
+    association       :item, factory: :item
 
     factory :entities_with_stock do
       after(:create) { |entity| create(:stock_item, item: entity.item ) }

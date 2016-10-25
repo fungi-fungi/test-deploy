@@ -7,7 +7,7 @@ class StockItem < ActiveRecord::Base
 
     validates_presence_of :name, :sfid, :account, :item, :i_m__amount__c, :createddate
 
-    scope :for_configuration, lambda { |configuration| where(item: configuration.get_related_items.pluck(:sfid)) }
-    scope :for_category, lambda { |category| where(item: category.items.pluck(:sfid)) if category.present? }  
-    scope :for_account, lambda { |account| where(account: account) }
+    scope :for_configuration, ->(configuration) { where(item: configuration.get_related_items.pluck(:sfid)) }
+    scope :for_category, ->(category) { where(item: category.items.pluck(:sfid)) if category.present? }  
+    scope :for_account, ->(account) { where(account: account) }
 end

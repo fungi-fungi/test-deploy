@@ -66,8 +66,8 @@ RSpec.describe BomStock, type: :model do
 
     it "no unavailable item" do
       FactoryGirl.create(:item_entity, bom: bom, item: items.first, i_m__amount__c: stock_items.first.i_m__amount__c - 1)
-      entity = FactoryGirl.create(:item_entity, bom: bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c - 2)
-      request_entity = FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: 1)
+      FactoryGirl.create(:item_entity, bom: bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c - 2)
+      FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: 1)
       
       expect(unavailable.size).to eq(0)
     end
@@ -75,7 +75,7 @@ RSpec.describe BomStock, type: :model do
     it "unavailable item" do
       FactoryGirl.create(:item_entity, bom: bom, item: items.first, i_m__amount__c: stock_items.first.i_m__amount__c - 1)
       entity = FactoryGirl.create(:item_entity, bom: bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c - 1)
-      request_entity = FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c)
+      FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c)
 
       expect(unavailable.size).to eq(1)
       expect(unavailable_ids).to include(entity.id)
@@ -84,8 +84,8 @@ RSpec.describe BomStock, type: :model do
     it "two unavailable items" do
       entity = FactoryGirl.create(:item_entity, bom: bom, item: items.first, i_m__amount__c: stock_items.first.i_m__amount__c - 1)
       entity_1 = FactoryGirl.create(:item_entity, bom: bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c - 1)
-      request_entity = FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.first, i_m__amount__c: stock_items.first.i_m__amount__c)
-      request_entity_2 = FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c)
+      FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.first, i_m__amount__c: stock_items.first.i_m__amount__c)
+      FactoryGirl.create(:request_entity, request_bom: request_bom, item: items.second, i_m__amount__c: stock_items.second.i_m__amount__c)
 
       expect(unavailable.size).to eq(2)
       expect(unavailable_ids).to include(entity.id)

@@ -1,14 +1,14 @@
 FactoryGirl.define do
-  factory :account do |f|
-    f.name  { Faker::Name.name }
-    f.sfid  { Faker::Number.number(10) }
+  factory :account do
+    name  { Faker::Name.name }
+    sfid  { Faker::Number.number(10) }
 
-    trait :venue do |f|
-      f.recordtypeid "01236000000salCAAQ"
+    trait :venue do
+      recordtypeid "01236000000salCAAQ"
     end
 
-    trait :client do |f|
-      f.recordtypeid "01236000000salMAAQ"
+    trait :client do
+      recordtypeid "01236000000salMAAQ"
     end
 
     factory :account_venue, traits: [:venue]

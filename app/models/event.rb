@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
 
   def account_should_be_venue
     if self.account
-      if self.account.recordtypeid == nil || self.account.recordtypeid != "01236000000salCAAQ"
+      if self.account.recordtypeid.nil? || self.account.recordtypeid != "01236000000salCAAQ"
         errors.add(:date_error, "account should be a venue")
       end
     end

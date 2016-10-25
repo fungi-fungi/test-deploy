@@ -1,7 +1,7 @@
- require "rails_helper"
+require "rails_helper"
 
 RSpec.describe Api::V1::BomsController, :type => :controller do
-
+  
   let(:stock_items) { FactoryGirl.create_list(:stock_item, 10) }
   let(:items) { stock_items.map { |stock_item| stock_item.item } }
   let(:bom) { FactoryGirl.create(:bom_for_exisiting_items_random, existing_items: items, amount_of_items: 5) }

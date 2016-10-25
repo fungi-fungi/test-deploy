@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :configuration do |f|
-    f.name        { Faker::Commerce.product_name }
-    f.sfid        { Faker::Number.number(10) }
+  factory :configuration do
+    name        { Faker::Commerce.product_name }
+    sfid        { Faker::Number.number(10) }
     association   :account, factory: :account
     association   :bom, factory: :bom
     association   :category_set, factory: :category_set

@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :request_bom do |f|
-    f.name                  { "RO-#{Faker::Number.number(5)}" }
+  factory :request_bom do
+    name  { "RO-#{Faker::Number.number(5)}" }
 
     factory :request_bom_with_entities do
       after(:create) { |request_bom| create_list(:request_entity, 10, request_bom: request_bom) }
@@ -18,7 +18,7 @@ FactoryGirl.define do
 
       after(:create) do |request_bom, evaluator|
 
-        evaluator.amount_of_items.times do |item|
+        evaluator.amount_of_items.times do
           create(:request_entity, request_bom: request_bom, item: evaluator.existing_items.sample )
         end
 

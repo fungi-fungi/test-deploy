@@ -9,7 +9,7 @@ class OrderRequest < ActiveRecord::Base
   validates_associated :account, :request_bom, :event
   validates_presence_of :account, :request_bom, :event
 
-  scope :belongs_to_overlap, lambda { |event| where(i_m__to_event__c: event.overlapping.pluck(:sfid)) }
+  scope :belongs_to_overlap, ->(event) { where(i_m__to_event__c: event.overlapping.pluck(:sfid)) }
 
   def get_related_items
     self.request_bom.items.uniq

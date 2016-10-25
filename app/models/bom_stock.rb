@@ -8,11 +8,11 @@ class BomStock < ActiveModelSerializers::Model
   end
 
   def build_unavailable_items(bom_entities, available_items_map)
-    bom_entities.inject([]) { |arr, el| available_items_map.fetch(el.i_m__to_item__c, 0) < el.i_m__amount__c ? arr << el : arr ; arr }
+    bom_entities.each_with_object([]) { |el, arr| available_items_map.fetch(el.i_m__to_item__c, 0) < el.i_m__amount__c ? arr << el : arr ; arr }
   end
 
   def build_stock_items(bom_entities, available_items_map)
-    bom_entities.inject([]) { |arr, el| arr << BomStockEntity.new(build_params_for_entity(el, available_items_map[el.i_m__to_item__c])); arr }
+    bom_entities.each_with_object([]) { |el, arr| arr << BomStockEntity.new(build_params_for_entity(el, available_items_map[el.i_m__to_item__c])); arr }
   end
 
   def available_stock(event, bom)
@@ -20,7 +20,7 @@ class BomStock < ActiveModelSerializers::Model
   end
 
   def stock_items_map(bom)
-    StockItem.where(item: bom.items).inject(Hash.new) { |hash, el| hash[el.i_m__to_item__c] = el.i_m__amount__c; hash }
+    StockItem.where(item: bom.items).each_with_object({}) { |el, hash| hash[el.i_m__to_item__c] = el.i_m__amount__c; hash }
   end
 
   def bom_items_amount_map(bom)
@@ -30,7 +30,7 @@ class BomStock < ActiveModelSerializers::Model
   end
   
   def order_entities_map(event)
-    orders_entities(event).inject(Hash.new) { |hash, el| hash[el.i_m__to_item__c] = el.i_m__amount__c; hash }
+    orders_entities(event).each_with_object({}) { |el, hash| hash[el.i_m__to_item__c] = el.i_m__amount__c }
   end
 
   def orders_entities(event)

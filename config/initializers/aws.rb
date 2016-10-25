@@ -1,6 +1,6 @@
 Aws.config.update({
   region: ENV['S3_REGION'],
-  credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
+  credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
 })
 
 SIGNER = Aws::S3::Presigner.new
