@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :configuration do
-    name        { Faker::Commerce.product_name }
-    sfid        { Faker::Number.number(10) }
+    name          { Faker::Commerce.product_name }
+    sfid          { Faker::Number.number(10) }
     association   :account, factory: :account
     association   :bom, factory: :bom
     association   :category_set, factory: :category_set
@@ -19,6 +19,5 @@ FactoryGirl.define do
     factory :configuration_with_sets_iurii, traits: [:iurii_configurations, :with_sets]
     factory :configuration_with_sets, traits: [:with_sets]
     
-
   end
 end

@@ -27,7 +27,7 @@ class Api::V1::OrderRequestsController < Api::V1::BaseController
   private
   
   def new_order_params
-    params.require(:order).permit(:event, :configuration, entities: [:amount, :sfid, :provider]).delete_if { |k,v| v.nil? || v.empty? }
+    params.require(:order).permit(:event, :configuration, entities: [:amount, :sfid, :provider]).delete_if { |_,v| v.nil? || v.empty? }
   end
 
   def transform_entities

@@ -1,11 +1,11 @@
 FactoryGirl.define do
-  factory :event do |f|
-    name                        { "SE-#{Faker::Number.number(5)}" }
-    sfid                        { Faker::Number.number(10) }
-    i_m__city__c                { Faker::Address.city }
-    i_m__start_date__c          { Faker::Time.between(20.days.ago, 15.days.ago) }
-    i_m__end_date__c            { Faker::Time.between(10.days.ago, Time.zone.today) }
-    association                 :account, factory: :account_venue
+  factory :event do
+    name                { "SE-#{Faker::Number.number(5)}" }
+    sfid                { Faker::Number.number(10) }
+    i_m__city__c        { Faker::Address.city }
+    i_m__start_date__c  { Faker::Time.between(20.days.ago, 15.days.ago) }
+    i_m__end_date__c    { Faker::Time.between(10.days.ago, Time.zone.today) }
+    association         :account, factory: :account_venue
 
     factory :event_name_overlap do
 

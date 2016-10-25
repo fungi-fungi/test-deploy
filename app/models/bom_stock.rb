@@ -16,7 +16,7 @@ class BomStock < ActiveModelSerializers::Model
   end
 
   def available_stock(event, bom)
-    bom_items_amount_map(bom).merge(order_entities_map(event)) { |k, stock, required| stock.nil? ? 0 - required : stock - required }
+    bom_items_amount_map(bom).merge(order_entities_map(event)) { |_, stock, required| stock.nil? ? 0 - required : stock - required }
   end
 
   def stock_items_map(bom)

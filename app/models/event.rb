@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :order_requests, primary_key: 'sfid', foreign_key: 'i_m__to_event__c'
   belongs_to :account, primary_key: 'sfid', foreign_key: 'i_m__convention_center__c'
 
-  scope :search_by_name, lambda { |name| name.size > 1 ? where("LOWER(name) LIKE ?", "%#{name.downcase}%") : none }
+  scope :search_by_name, ->(name) { name.size > 1 ? where("LOWER(name) LIKE ?", "%#{name.downcase}%") : none }
 
   validates_presence_of :name, :sfid, :account, :i_m__start_date__c, :i_m__end_date__c, :i_m__city__c
   validate :start_date_has_to_be_before_end_date, :account_should_be_venue

@@ -8,9 +8,8 @@ class RequestEntity < ActiveRecord::Base
   validates_numericality_of :i_m__amount__c, greater_than: 0
 
   def self.build_item_id_map(collection)
-    collection.inject(Hash.new) do |hash, el|
+    collection.each_with_object(Hash.new) do |el, hash|
       hash.has_key?(el.i_m__to_item__c) ? hash[el.i_m__to_item__c] = hash[el.i_m__to_item__c] + el.i_m__amount__c : hash[el.i_m__to_item__c] = el.i_m__amount__c
-      hash
     end
   end
 
