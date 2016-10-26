@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       
       resources :order_requests, only: [:index, :show, :create]
 
+      resources :suggested_rental_set, only: [:show]
+
       resources :items, only: [:show] do
         get 'rental', on: :collection
       end
@@ -16,10 +18,6 @@ Rails.application.routes.draw do
 
       resources :events, only: [:index, :show] do
         get 'search', on: :collection
-      end
-
-      resources :rentals, only: [:index] do
-        get 'suggested', on: :collection
       end
 
       resources :boms, only: [:show] do
