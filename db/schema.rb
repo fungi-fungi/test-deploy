@@ -83,19 +83,19 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "_trigger_log_archive", ["state", "table_name"], name: "_trigger_log_archive_idx_state_table_name", where: "((state)::text = 'FAILED'::text)", using: :btree
 
   create_table "account", force: :cascade do |t|
-    t.string   "_hc_lastop",                       limit: 32
-    t.string   "i_m__to_suggested_renatal_set__c", limit: 18
-    t.string   "name",                             limit: 255
+    t.string   "_hc_lastop",                   limit: 32
+    t.string   "i_m__suggested_renatl_set__c", limit: 18
+    t.string   "name",                         limit: 255
     t.datetime "systemmodstamp"
     t.boolean  "isdeleted"
     t.datetime "createddate"
-    t.string   "sfid",                             limit: 18
+    t.string   "sfid",                         limit: 18
     t.text     "_hc_err"
-    t.string   "masterrecordid",                   limit: 18
-    t.string   "recordtypeid",                     limit: 18
+    t.string   "masterrecordid",               limit: 18
+    t.string   "recordtypeid",                 limit: 18
   end
 
-  add_index "account", ["i_m__to_suggested_renatal_set__c"], name: "hc_idx_account_i_m__suggested_renatl_set__c", using: :btree
+  add_index "account", ["i_m__suggested_renatl_set__c"], name: "hc_idx_account_i_m__suggested_renatl_set__c", using: :btree
   add_index "account", ["masterrecordid"], name: "hc_idx_account_masterrecordid", using: :btree
   add_index "account", ["recordtypeid"], name: "hc_idx_account_recordtypeid", using: :btree
   add_index "account", ["sfid"], name: "hcu_idx_account_sfid", unique: true, using: :btree
@@ -180,6 +180,36 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "i_m__configuration__c", ["i_m__to_category_set__c"], name: "hc_idx_i_m__configuration__c_i_m__to_category_set__c", using: :btree
   add_index "i_m__configuration__c", ["sfid"], name: "hcu_idx_i_m__configuration__c_sfid", unique: true, using: :btree
   add_index "i_m__configuration__c", ["systemmodstamp"], name: "hc_idx_i_m__configuration__c_systemmodstamp", using: :btree
+
+  create_table "i_m__graphic_entity__c", force: :cascade do |t|
+    t.datetime "createddate"
+    t.string   "sfid",                    limit: 18
+    t.string   "name",                    limit: 80
+    t.text     "_hc_err"
+    t.boolean  "isdeleted"
+    t.string   "_hc_lastop",              limit: 32
+    t.datetime "systemmodstamp"
+    t.string   "i_m__to_graphics_set__c", limit: 18
+    t.string   "i_m__to_item__c",         limit: 18
+    t.string   "i_m__position__c",        limit: 10
+  end
+
+  add_index "i_m__graphic_entity__c", ["sfid"], name: "hcu_idx_i_m__graphic_entity__c_sfid", unique: true, using: :btree
+  add_index "i_m__graphic_entity__c", ["systemmodstamp"], name: "hc_idx_i_m__graphic_entity__c_systemmodstamp", using: :btree
+
+  create_table "i_m__graphics_set__c", force: :cascade do |t|
+    t.datetime "createddate"
+    t.datetime "systemmodstamp"
+    t.string   "name",                     limit: 80
+    t.string   "sfid",                     limit: 18
+    t.string   "_hc_lastop",               limit: 32
+    t.string   "i_m__to_configuration__c", limit: 18
+    t.text     "_hc_err"
+    t.boolean  "isdeleted"
+  end
+
+  add_index "i_m__graphics_set__c", ["sfid"], name: "hcu_idx_i_m__graphics_set__c_sfid", unique: true, using: :btree
+  add_index "i_m__graphics_set__c", ["systemmodstamp"], name: "hc_idx_i_m__graphics_set__c_systemmodstamp", using: :btree
 
   create_table "i_m__item__c", force: :cascade do |t|
     t.string   "_hc_lastop",                           limit: 32
@@ -394,29 +424,29 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "i_m__storage_location__c", ["systemmodstamp"], name: "hc_idx_i_m__storage_location__c_systemmodstamp", using: :btree
 
   create_table "i_m__suggested_rental_entity__c", force: :cascade do |t|
+    t.string   "name",                            limit: 80
     t.string   "sfid",                            limit: 18
     t.string   "i_m__to_item__c",                 limit: 18
     t.datetime "createddate"
-    t.string   "name",                            limit: 80
     t.string   "i_m__to_suggested_rental_set__c", limit: 18
     t.datetime "systemmodstamp"
-    t.boolean  "isdeleted"
     t.text     "_hc_err"
     t.string   "_hc_lastop",                      limit: 32
+    t.boolean  "isdeleted"
   end
 
   add_index "i_m__suggested_rental_entity__c", ["i_m__to_item__c"], name: "hc_idx_i_m__suggested_rental_entity__c_i_m__to_item__c", using: :btree
-  add_index "i_m__suggested_rental_entity__c", ["i_m__to_suggested_rental_set__c"], name: "hc_idx_i_m__suggested_rental_entity__c_i_m__to_suggested_set__c", using: :btree
+  add_index "i_m__suggested_rental_entity__c", ["i_m__to_suggested_rental_set__c"], name: "hc_idx_i_m__suggested_rental_entity__c_i_m__to_suggeste_fae1", using: :btree
   add_index "i_m__suggested_rental_entity__c", ["sfid"], name: "hcu_idx_i_m__suggested_rental_entity__c_sfid", unique: true, using: :btree
   add_index "i_m__suggested_rental_entity__c", ["systemmodstamp"], name: "hc_idx_i_m__suggested_rental_entity__c_systemmodstamp", using: :btree
 
   create_table "i_m__suggested_rental_set__c", force: :cascade do |t|
+    t.string   "_hc_lastop",     limit: 32
+    t.datetime "systemmodstamp"
     t.boolean  "isdeleted"
     t.string   "sfid",           limit: 18
-    t.datetime "createddate"
-    t.datetime "systemmodstamp"
     t.string   "name",           limit: 80
-    t.string   "_hc_lastop",     limit: 32
+    t.datetime "createddate"
     t.text     "_hc_err"
   end
 
