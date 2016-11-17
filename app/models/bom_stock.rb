@@ -8,11 +8,11 @@ class BomStock < ActiveModelSerializers::Model
   end
 
   def build_unavailable_items(bom_entities, available_items_map)
-    bom_entities.each_with_object([]) { |el, arr| available_items_map.fetch(el.i_m__to_item__c, 0) < el.i_m__amount__c ? arr << el : arr ; arr }
+    bom_entities.each_with_object([]) { |el, arr| available_items_map.fetch(el.i_m__to_item__c, 0) < el.i_m__amount__c ? arr << el : arr }
   end
 
   def build_stock_items(bom_entities, available_items_map)
-    bom_entities.each_with_object([]) { |el, arr| arr << BomStockEntity.new(build_params_for_entity(el, available_items_map[el.i_m__to_item__c])); arr }
+    bom_entities.each_with_object([]) { |el, arr| arr << BomStockEntity.new(build_params_for_entity(el, available_items_map[el.i_m__to_item__c])) }
   end
 
   def available_stock(event, bom)
@@ -20,7 +20,7 @@ class BomStock < ActiveModelSerializers::Model
   end
 
   def stock_items_map(bom)
-    StockItem.where(item: bom.items).each_with_object({}) { |el, hash| hash[el.i_m__to_item__c] = el.i_m__amount__c; hash }
+    StockItem.where(item: bom.items).each_with_object({}) { |el, hash| hash[el.i_m__to_item__c] = el.i_m__amount__c }
   end
 
   def bom_items_amount_map(bom)
@@ -36,6 +36,10 @@ class BomStock < ActiveModelSerializers::Model
   def orders_entities(event)
     OrderRequest.get_related_entities(OrderRequest.belongs_to_overlap(event).pluck(:sfid))
   end
+
+  # def build_params_for_entity(bom_entity, avaliable_item)
+  #   { id: bom_entity.id, item: bom_entity.item, avaliable_amount: avaliable_item, required_amount: bom_entity.i_m__amount__c }
+  # end
 
   def build_params_for_entity(bom_entity, avaliable_item)
     { id: bom_entity.id, item_entity: bom_entity, avaliable_amount: avaliable_item }
