@@ -6,8 +6,6 @@ class RequestBom < ActiveRecord::Base
   has_many :request_entities, primary_key: "i_m__externalid__c", foreign_key: "i_m__to_request_bom__r__i_m__externalid__c", inverse_of: :request_bom
   has_one :order_request, primary_key: "i_m__externalid__c", foreign_key: "i_m__to_request_bom__r__i_m__externalid__c"
   accepts_nested_attributes_for :request_entities
-
-  # before_validation :set_id
   
   def initialize(attributes={})
     super

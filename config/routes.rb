@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :suggested_rental_set, only: [:show]
 
       resources :items, only: [:show] do
-        get 'rental', on: :collection
+        get 'available', on: :member
       end
       
       resources :configurations, only: [:index, :show] do

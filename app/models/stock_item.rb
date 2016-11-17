@@ -10,4 +10,5 @@ class StockItem < ActiveRecord::Base
     scope :for_configuration, ->(configuration) { where(item: configuration.get_related_items.pluck(:sfid)) }
     scope :for_category, ->(category) { where(item: category.items.pluck(:sfid)) if category.present? }  
     scope :for_account, ->(account) { where(account: account) }
+    scope :for_item, ->(item) { where(item: item) }
 end
