@@ -4,6 +4,7 @@ class Configuration < ActiveRecord::Base
   belongs_to :account, primary_key: "sfid", foreign_key: "i_m__to_account__c"
   belongs_to :bom, primary_key: "sfid", foreign_key: "i_m__to_bom__c"
   belongs_to :category_set, primary_key: "sfid", foreign_key: "i_m__to_category_set__c"
+  has_many :graphics_sets, primary_key: "sfid", foreign_key: "i_m__to_configuration__c"
 
   scope :search_by_name, ->(account, name) { name.size > 1 ? where(account: account).where("LOWER(name) LIKE ?", "%#{name.downcase}%") : none }
 

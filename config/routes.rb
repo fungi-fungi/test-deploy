@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
       
       resources :configurations, only: [:index, :show] do
+        resources :graphics_set, only: [:index, :show]
         get 'search', on: :collection
       end
 
