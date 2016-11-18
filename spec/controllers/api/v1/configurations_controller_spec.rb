@@ -34,34 +34,7 @@ RSpec.describe Api::V1::ConfigurationsController, :type => :controller do
         expect(JSON.parse(response.body).size).to eq(configurations.size)
       end
 
-      context 'pagination' do
-
-        before(:each) do
-          @amount_on_second_page = 5
-          @configurations = FactoryGirl.create_list(:configuration, WillPaginate.per_page + @amount_on_second_page, account: @account)
-        end
-
-        it "returns correct amount of records per page" do
-          get :index
-          expect(JSON.parse(response.body).size).to eq(WillPaginate.per_page)
-        end
-
-        it "return correct records per page in header" do
-          get :index
-          expect(response.headers['Per-Page'].to_i).to be == WillPaginate.per_page
-        end
-
-        it "returns correct total amount in header" do
-          get :index
-          expect(response.headers['Total'].to_i).to eq(@configurations.size)
-        end
-
-        it "returns correct amount of items on all pages" do        
-          get :index, { page: 2 }
-          expect(JSON.parse(response.body).size).to eq(@amount_on_second_page)
-        end
-
-      end
+      it_behaves_like "a paginable", :configuration_belongs_to_iurii
 
       describe "search" do
 
