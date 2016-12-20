@@ -1,9 +1,8 @@
-RSpec.shared_examples "a paginable" do |object_factory, params = {}|
+RSpec.shared_examples "a paginable" do |object_factory, params = {}, path = :index|
   
   context "response returns" do
 
     before(:each) do
-      
       @request_params = {}
       @amount_on_second_page = 5
 
@@ -18,22 +17,22 @@ RSpec.shared_examples "a paginable" do |object_factory, params = {}|
     end
     
     it "correct amount of records" do
-      get :index, @request_params
+      get path, @request_params
       expect(JSON.parse(response.body).size).to eq(WillPaginate.per_page)
     end
 
     it "correct records per page in header" do
-      get :index, @request_params
+      get path, @request_params
       expect(response.headers['Per-Page'].to_i).to be == WillPaginate.per_page
     end
 
     it "correct total @request_params in header" do
-      get :index, @request_params
+      get path, @request_params
       expect(response.headers['Total'].to_i).to eq(@objects.size)
     end
 
     it "correct amount of items on all pages" do        
-      get :index, @request_params.merge({ page: 2 })
+      get path, @request_params.merge({ page: 2 })
       expect(JSON.parse(response.body).size).to eq(@amount_on_second_page)
     end
 
