@@ -93,5 +93,6 @@ RSpec.describe BomStock, type: :model do
     end
 
   end
+
   
 end

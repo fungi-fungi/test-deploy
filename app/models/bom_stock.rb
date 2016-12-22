@@ -33,13 +33,29 @@ class BomStock < ActiveModelSerializers::Model
     orders_entities(event).each_with_object({}) { |el, hash| hash[el.i_m__to_item__c] = el.i_m__amount__c }
   end
 
+  # THIS PART REQUIRES ADDITIONAL TESTING
+
+  # TODO
+  # REWRITE THIS PART 
+  # overlap calculation should go to appropriate class
+  # event and opportunity overlaps query should heppend in controller(helper)
+
+
   def orders_entities(event)
-    OrderRequest.get_related_entities(OrderRequest.belongs_to_overlap(event).pluck(:sfid))
+    OrderRequest.get_related_entities(get_all_reques_orders(event))
   end
 
-  # def build_params_for_entity(bom_entity, avaliable_item)
-  #   { id: bom_entity.id, item: bom_entity.item, avaliable_amount: avaliable_item, required_amount: bom_entity.i_m__amount__c }
-  # end
+  def get_all_reques_orders(event)
+    order_request_from_event_overlap(event).concat(order_request_from_opportunity_overlap(event)).compact.uniq
+  end
+
+  def order_request_from_event_overlap(event)
+    OrderRequest.belongs_to_overlap(event).pluck(:sfid)
+  end
+
+  def order_request_from_opportunity_overlap(event)
+    Opportunity.overlapping_order_requests_sfids(event)
+  end
 
   def build_params_for_entity(bom_entity, avaliable_item)
     { id: bom_entity.id, item_entity: bom_entity, avaliable_amount: avaliable_item }

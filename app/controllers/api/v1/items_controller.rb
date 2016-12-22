@@ -9,8 +9,12 @@ class Api::V1::ItemsController < Api::V1::BaseController
     event = Event.find(params[:event_id])
     stock_items = client.stock_items.for_item(item)
 
-    order_requests_in_period = OrderRequest.belongs_to_overlap(event).pluck(:sfid)
-    request_entities = RequestEntity.from_inventory.reserved_entities_by_item(order_requests_in_period, item)
+    from_event_overlap = OrderRequest.belongs_to_overlap(event).pluck(:sfid)
+    from_opportunity_overlap = Opportunity.overlapping_order_requests_sfids(event)
+
+    order_requests = from_event_overlap.concat(from_opportunity_overlap).compact.uniq
+    
+    request_entities = RequestEntity.from_inventory.reserved_entities_by_item(order_requests, item)
 
     available_item_entity = AvailableItemEntity.new({
        id: item.id,
